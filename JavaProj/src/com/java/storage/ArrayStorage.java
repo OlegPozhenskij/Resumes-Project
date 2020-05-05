@@ -5,16 +5,16 @@ import com.java.model.Resume;
 import java.util.Arrays;
 
 public class ArrayStorage {
-
-    private Resume[] storage = new Resume[5];
+    private static final int STORAGE_LIMIT = 5;
+    private Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size = 0;
 
     public void clear() {
-        Arrays.fill(storage,0, size, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    public void update(Resume r, int index) {
+    public void update(Resume r) {
         if (isExist(getIndex(r.getUuid()))) {
             storage[size] = r;
             size++;
