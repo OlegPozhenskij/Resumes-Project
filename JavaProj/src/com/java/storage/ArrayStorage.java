@@ -14,35 +14,42 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void save(Resume r) {
-        if(size < storage.length) {
-            int i = 0;
-            while(storage[i] != null) {
-                if(storage[i].toString().equals(r.toString())) {
-                    return;
-                }
-                ++i;
-            }
+    public void update(Resume r) {
+        if(resumeExist(r.getUuid()) == -1) {
+            System.out.println("Resume is not exist");
+        } else {
             storage[size] = r;
             size++;
         }
     }
 
-    public Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid()))
-                return storage[i];
+    public void save(Resume r) {
+        if(resumeExist(r.getUuid()) == -1) {
+            storage[size] = r;
+            size++;
+        } else {
+            System.out.println("Resume is already exist");
         }
-        return null;
+    }
+
+    public Resume get(String uuid) {
+        int i = resumeExist(uuid);
+        if(i == -1) {
+            System.out.println("Resume is not exist");
+            return null;
+        } else {
+            return storage[i];
+        }
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-            }
+        int i = resumeExist(uuid);
+        if(i == -1) {
+            System.out.println("Resume is not exist");
+        } else {
+            storage[i] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
         }
     }
 
@@ -52,6 +59,15 @@ public class ArrayStorage {
             result[i] = storage[i];
         }
         return result;
+    }
+
+    private int  resumeExist(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if(storage[i].toString().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public int size() {
