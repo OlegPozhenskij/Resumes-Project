@@ -2,6 +2,7 @@ package com.java;
 
 import com.java.model.Resume;
 import com.java.storage.ArrayStorage;
+import com.java.storage.Storage;
 
 /**
  * Test ArrayStorage
@@ -9,7 +10,7 @@ import com.java.storage.ArrayStorage;
 
 public class MainTestArrayStorage {
 
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         final Resume r1 = new Resume();
