@@ -2,6 +2,7 @@ package com.java;
 
 import com.java.model.Resume;
 import com.java.storage.ArrayStorage;
+import com.java.storage.SortedArrayStorage;
 import com.java.storage.Storage;
 
 import java.io.BufferedReader;
@@ -15,7 +16,7 @@ import java.io.InputStreamReader;
  */
 
 public class MainArray {
-    private final static Storage ARRAY_STORAGE = new ArrayStorage();
+    private final static Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
