@@ -4,10 +4,7 @@ import com.java.model.Resume;
 
 import java.util.Arrays;
 
-public class ArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 5;
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size = 0;
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -59,17 +56,13 @@ public class ArrayStorage implements Storage {
         return Arrays.copyOf(storage, size);
     }
 
-    public int size() {
-        return size;
-    }
-
     private boolean isExist(int index) {
         if (index != -1)
             return true;
         return false;
     }
 
-    private int getIndex(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if(storage[i].toString().equals(uuid)) {
                 return i;

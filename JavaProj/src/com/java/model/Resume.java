@@ -2,7 +2,7 @@ package com.java.model;
 
 import java.util.Objects;
 
-public class Resume {
+public class Resume implements Comparable<Resume> {
 
     private String uuid;
 
@@ -29,5 +29,10 @@ public class Resume {
 
     public String toString() {
         return uuid;
+    }
+
+    @Override
+    public int compareTo(Resume r) {
+        return uuid.compareTo(r.uuid);
     }
 }
