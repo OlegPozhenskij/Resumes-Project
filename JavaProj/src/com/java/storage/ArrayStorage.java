@@ -5,21 +5,14 @@ import com.java.model.Resume;
 import java.util.Arrays;
 
 public class ArrayStorage extends AbstractArrayStorage {
-
     @Override
-    protected void doAdd(int index, Resume r) {
+    protected void insertElement(int index, Resume r) {
         storage[size] = r;
     }
 
     @Override
-    protected void doDelete(int index) {
+    protected void fillDeletedElement(int index) {
         storage[index] = storage[size - 1];
-    }
-
-    @Override
-    protected void doUpdate(int index, Resume r) {
-        storage[size] = r;
-        size++;
     }
 
     protected boolean isExist(int index) {
@@ -27,8 +20,6 @@ public class ArrayStorage extends AbstractArrayStorage {
             return true;
         return false;
     }
-
-
 
     protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
