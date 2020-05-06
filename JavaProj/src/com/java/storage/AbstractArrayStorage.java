@@ -1,5 +1,8 @@
 package com.java.storage;
 
+import com.java.exception.ExistStorageExeption;
+import com.java.exception.NotExistStorageExeption;
+import com.java.exception.StorageExeption;
 import com.java.model.Resume;
 
 import java.util.Arrays;
@@ -19,7 +22,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (isExist(index)) {
             storage[index] = r;
         } else {
-            System.out.println("Resume " + r.getUuid() + " not exist");
+            throw new NotExistStorageExeption(r.getUuid());
         }
     }
 
@@ -27,9 +30,9 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(r.getUuid());
         if (isExist(index)) {
             update(r);
-            System.out.println("Resume " + r.getUuid() + " already exist");
+            throw new ExistStorageExeption(r.getUuid());
         } else if(size == storage.length) {
-            System.out.println("Storage overflow");
+            throw new StorageExeption("Storage overflow", r.getUuid());
         } else {
             insertElement(index, r);
             size++;
@@ -41,8 +44,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if(isExist(index)) {
             return storage[index];
         } else {
-            System.out.println("Resume " + uuid + " not exist");
-            return null;
+            throw new NotExistStorageExeption(uuid);
         }
     }
 
@@ -53,7 +55,7 @@ public abstract class AbstractArrayStorage implements Storage {
             storage[size - 1] = null;
             size--;
         } else {
-            System.out.println("Resume " + uuid + " not exist");
+            throw new NotExistStorageExeption(uuid);
         }
     }
 
