@@ -19,37 +19,20 @@ public class MainCollection {
     private static final Resume R4 = new Resume(UUID_4);
 
     public static void main(String[] args) {
-//        Collection<Resume> collection = new ArrayList<>();
-//
-//        collection.add(R1);
-//        collection.add(R2);
-//        collection.add(R3);
-
-//        for (Resume r: collection) {
-//            if(Objects.equals(r.getUuid(), UUID_1)) {        not work!!!
-//                collection.remove(r);
-//            }
-//        }
-//        System.out.println(collection.toString());
-//
-//
-//        Iterator<Resume> iter = collection.iterator();
-//        while (iter.hasNext()) {
-//            Resume r = iter.next();
-//            if(Objects.equals(r, UUID_1)) {
-//                iter.remove();
-//            }
-//        }
-
-        Map<String, Resume> map = new HashMap<>();
-        map.put(UUID_1, R1);
-        map.put(UUID_2, R2);
-        map.put(UUID_3, R3);
-        map.put(UUID_4, R4);
-
-
-        for (Map.Entry<String, Resume> entry : map.entrySet()) {
-            System.out.println(entry.getValue());
+        MainCollection mc = new MainCollection();
+        ArrayList al = new ArrayList();
+        al.add("First element");
+        al.add("Second element");
+        al.add("Third element");
+        Iterator it = al.iterator();
+        while(it.hasNext()) {
+            System.out.println((String)it.next());
+        }
+        System.out.println("\n");
+        al.add(2,"Insertion");
+        it = al.iterator();
+        while(it.hasNext()){
+            System.out.println((String)it.next());
         }
     }
 }
