@@ -14,17 +14,14 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract void fillDeletedElement(Object o);
     protected abstract boolean isExist(Object o);
-    protected abstract Object getIndex(String uuid);
     protected abstract void insertElement(Object o, Resume r);
 
-    @Override
-    protected void doClean() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    @Override
-    protected boolean checkOverflow() {
+    private boolean checkOverflow() {
         return size == storage.length;
     }
 
@@ -51,13 +48,23 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
     }
 
-    @Override
-    protected int getSize() {
+    public int size() {
         return size;
     }
 
-    @Override
-    protected Resume[] getArray() {
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
+
+    @Override
+    protected Object getSearchKey(String uuid) {
+        int key = (Integer)getKey(uuid);
+        if(checkOverflow()) {
+            throw new StorageExeption("Storage overflow", uuid);
+        } else {
+            return key;
+        }
+    }
+
+    protected abstract Object getKey(String uuid);
 }
