@@ -12,10 +12,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
-    protected abstract void fillDeletedElement(Object o);
-    protected abstract boolean isExist(Object o);
-    protected abstract void insertElement(Object o, Resume r);
-
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
@@ -26,24 +22,33 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Object o, Resume r) {
-        storage[(Integer) o] = r;
+    protected void doUpdate(Object index, Resume r) {
+        storage[(Integer) index] = r;
     }
 
     @Override
-    protected void doAdd(Object o, Resume r) {
-        insertElement(o, r);
-        size++;
+    protected void doSave(Object index, Resume r) {
+        if(checkOverflow()) {
+            throw new StorageExeption("Storage overflow", r.getUuid());
+        } else {
+            insertElement(index, r);
+            size++;
+        }
     }
 
     @Override
-    protected Resume getElement(Object o) {
-        return storage[(Integer) o];
+    protected Resume doGet(Object index) {
+        return storage[(Integer) index];
     }
 
     @Override
-    protected void doDelete(Object o) {
-        fillDeletedElement(o);
+    protected boolean isExist(Object index) {
+        return (Integer)index >= 0;
+    }
+
+    @Override
+    protected void doDelete(Object index) {
+        fillDeletedElement(index);
         storage[size - 1] = null;
         size--;
     }
@@ -55,16 +60,4 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
-
-    @Override
-    protected Object getSearchKey(String uuid) {
-        int key = (Integer)getKey(uuid);
-        if(checkOverflow()) {
-            throw new StorageExeption("Storage overflow", uuid);
-        } else {
-            return key;
-        }
-    }
-
-    protected abstract Object getKey(String uuid);
 }

@@ -34,5 +34,10 @@ public class MainCollection {
         while(it.hasNext()){
             System.out.println((String)it.next());
         }
+
+
     }
 }
+
+
+

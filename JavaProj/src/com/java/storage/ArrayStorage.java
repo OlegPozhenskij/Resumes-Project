@@ -9,20 +9,13 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected boolean isExist(Object o) {
-        if ((Integer)o != -1)
-            return true;
-        return false;
-    }
-
-    @Override
     protected void fillDeletedElement(Object o) {
         Integer index = (Integer) o;
         storage[index] = storage[size - 1];
     }
 
     @Override
-    protected Object getKey(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < size; i++) {
             if(storage[i].toString().equals(uuid)) {
                 return i;

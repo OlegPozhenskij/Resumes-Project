@@ -6,12 +6,14 @@ import com.java.exception.StorageExeption;
 import com.java.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected abstract void doAdd(Object searchKey, Resume r);
+    protected abstract void doSave(Object searchKey, Resume r);
     protected abstract boolean isExist(Object searchKey);
     protected abstract Object getSearchKey(String uuid);
     protected abstract void doUpdate(Object searchKey, Resume r);
-    protected abstract Resume getElement(Object searchKey);
+    protected abstract Resume doGet(Object searchKey);
     protected abstract void doDelete(Object searchKey);
+    protected abstract void insertElement(Object o, Resume r);
+    protected abstract void fillDeletedElement(Object o);
 
     @Override
     public void update(Resume r) {
@@ -22,13 +24,13 @@ public abstract class AbstractStorage implements Storage {
     @Override
     public void save(Resume r) {
         Object searchKey = getNotExistedSearchKey(r.getUuid());
-        doAdd(searchKey, r);
+        doSave(searchKey, r);
     }
 
     @Override
     public Resume get(String uuid) {
         Object searchKey = getExistedSearchKey(uuid);
-        return getElement(searchKey);
+        return doGet(searchKey);
     }
 
     @Override
