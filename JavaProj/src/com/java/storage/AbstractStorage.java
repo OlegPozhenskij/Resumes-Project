@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public abstract class AbstractStorage<SK> implements Storage {
+    private static final Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
 
     protected abstract void doSave(SK searchKey, Resume r);
     protected abstract boolean isExist(SK searchKey);
@@ -22,24 +23,28 @@ public abstract class AbstractStorage<SK> implements Storage {
 
     @Override
     public void update(Resume r) {
+        LOG.info("update " + r);
         SK searchKey = getExistedSearchKey(r.getUuid());
         doUpdate(searchKey, r);
     }
 
     @Override
     public void save(Resume r) {
+        LOG.info("save " + r);
         SK searchKey = getNotExistedSearchKey(r.getUuid());
         doSave(searchKey, r);
     }
 
     @Override
     public Resume get(String uuid) {
+        LOG.info("get " + uuid);
         SK searchKey = getExistedSearchKey(uuid);
         return doGet(searchKey);
     }
 
     @Override
     public void delete(String uuid) {
+        LOG.info("delete " + uuid);
         SK searchKey = getExistedSearchKey(uuid);
         doDelete(searchKey);
     }
@@ -47,6 +52,7 @@ public abstract class AbstractStorage<SK> implements Storage {
     private SK getExistedSearchKey(String uuid) {
         SK searchKey = getSearchKey(uuid);
         if(!isExist(searchKey)) {
+
             throw new NotExistStorageException(uuid);
         }
         return searchKey;
@@ -55,6 +61,7 @@ public abstract class AbstractStorage<SK> implements Storage {
     private SK getNotExistedSearchKey(String uuid) {
         SK searchKey = getSearchKey(uuid);
         if(isExist(searchKey)) {
+            LOG.warning("Resume " + uuid + " exist");
             throw new ExistStorageException(uuid);
         }
         return searchKey;
@@ -62,6 +69,7 @@ public abstract class AbstractStorage<SK> implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
+        LOG.info("get all sorted");
         List<Resume> list = doCopyAll();
         Collections.sort(list);
         return list;
