@@ -1,9 +1,9 @@
 package com.java.exception;
 
-public class StorageExeption extends RuntimeException {
+public class StorageException extends RuntimeException {
     private final String uuid;
 
-    public StorageExeption(String uuid, String message) {
+    public StorageException(String uuid, String message) {
         super(message);
         this.uuid = uuid;
     }

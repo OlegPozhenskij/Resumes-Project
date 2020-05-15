@@ -1,8 +1,7 @@
 package com.java.storage;
 
-import com.java.exception.ExistStorageExeption;
-import com.java.exception.NotExistStorageExeption;
-import com.java.exception.StorageExeption;
+import com.java.exception.ExistStorageException;
+import com.java.exception.NotExistStorageException;
 import com.java.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
@@ -42,7 +41,7 @@ public abstract class AbstractStorage implements Storage {
     private Object getExistedSearchKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
         if(!isExist(searchKey)) {
-            throw new NotExistStorageExeption(uuid);
+            throw new NotExistStorageException(uuid);
         }
         return searchKey;
     }
@@ -50,7 +49,7 @@ public abstract class AbstractStorage implements Storage {
     private Object getNotExistedSearchKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
         if(isExist(searchKey)) {
-            throw new ExistStorageExeption(uuid);
+            throw new ExistStorageException(uuid);
         }
         return searchKey;
     }

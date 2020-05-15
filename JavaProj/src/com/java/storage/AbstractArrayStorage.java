@@ -1,8 +1,6 @@
 package com.java.storage;
 
-import com.java.exception.ExistStorageExeption;
-import com.java.exception.NotExistStorageExeption;
-import com.java.exception.StorageExeption;
+import com.java.exception.StorageException;
 import com.java.model.Resume;
 
 import java.util.Arrays;
@@ -29,7 +27,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     protected void doSave(Object index, Resume r) {
         if(checkOverflow()) {
-            throw new StorageExeption("Storage overflow", r.getUuid());
+            throw new StorageException("Storage overflow", r.getUuid());
         } else {
             insertElement(index, r);
             size++;
