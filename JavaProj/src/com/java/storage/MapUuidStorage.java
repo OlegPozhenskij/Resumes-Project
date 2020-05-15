@@ -2,8 +2,7 @@ package com.java.storage;
 
 import com.java.model.Resume;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MapUuidStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
@@ -24,12 +23,7 @@ public class MapUuidStorage extends AbstractStorage {
 
     @Override
     protected Object getSearchKey(String uuid) {
-        for (Map.Entry entry : map.entrySet()) {
-            if (entry.getKey().equals(uuid)) {
-                return entry.getKey();
-            }
-        }
-        return null;
+        return uuid;
     }
 
     @Override
@@ -63,8 +57,8 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return map.values().toArray(new Resume[size()]);
+    public List<Resume> doCopyAll() {
+        return new ArrayList(map.values());
     }
 
     @Override
