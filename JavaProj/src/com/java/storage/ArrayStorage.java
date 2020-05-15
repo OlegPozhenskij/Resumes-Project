@@ -4,13 +4,13 @@ import com.java.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
-    protected void insertElement(Object o, Resume r) {
+    protected void insertElement(Integer o, Resume r) {
         storage[size] = r;
     }
 
     @Override
-    protected void fillDeletedElement(Object o) {
-        Integer index = (Integer) o;
+    protected void fillDeletedElement(Integer o) {
+        Integer index = o;
         storage[index] = storage[size - 1];
     }
 

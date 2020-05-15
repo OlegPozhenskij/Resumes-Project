@@ -17,16 +17,16 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     private final static Comparator<Resume> RESUME_COMPARATOR = (o1, o2) -> o1.getUuid().compareTo(o2.getUuid());
 
     @Override
-    protected void insertElement(Object o, Resume r) {
-        int index = (Integer) o;
+    protected void insertElement(Integer o, Resume r) {
+        int index = o;
         int indexIns = -index - 1;
         System.arraycopy(storage, indexIns, storage, indexIns + 1, size - indexIns);
         storage[indexIns] = r;
     }
 
     @Override
-    protected void fillDeletedElement(Object o) {
-        Integer index = (Integer) o;
+    protected void fillDeletedElement(Integer o) {
+        Integer index = o;
         int numMoved = size - index - 1;
         if(numMoved > 0) {
             System.arraycopy(storage, index + 1, storage, index, numMoved);
