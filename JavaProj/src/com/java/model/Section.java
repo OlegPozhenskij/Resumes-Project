@@ -1,4 +1,4 @@
 package com.java.model;
 
-public class Section {
+public abstract class Section {
 }

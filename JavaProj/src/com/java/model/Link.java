@@ -1,46 +1,44 @@
 package com.java.model;
 
+import java.util.Objects;
+
 public class Link {
-    private String rel;
-    private String type;
-    private String title;
+    private final String name;
+    private final String url;
 
-    public Link(String rel, String type, String title) {
-        this.rel = rel;
-        this.type = type;
-        this.title = title;
+    public Link(String name, String url) {
+        Objects.requireNonNull(name, "name must not be null");
+        this.name = name;
+        this.url = url;
     }
 
-    public String getrel() {
-        return rel;
+    public String getName() {
+        return name;
     }
 
-    public void setrel(String rel) {
-        this.rel = rel;
+    public String getUrl() {
+        return url;
     }
 
-    public String gettype() {
-        return type;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Link link = (Link) o;
+        return name.equals(link.name) &&
+                Objects.equals(url, link.url);
     }
 
-    public void settype(String type) {
-        this.type = type;
-    }
-
-    public String gettitle() {
-        return title;
-    }
-
-    public void settitle(String title) {
-        this.title = title;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, url);
     }
 
     @Override
     public String toString() {
         return "Link{" +
-                "rel='" + rel + '\'' +
-                ", type='" + type + '\'' +
-                ", title='" + title + '\'' +
+                "name='" + name + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }
