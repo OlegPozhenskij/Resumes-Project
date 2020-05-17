@@ -1,4 +1,4 @@
-package com.java;
+package com.java.main;
 
 import com.java.model.Resume;
 

@@ -17,8 +17,6 @@ public abstract class AbstractStorage<SK> implements Storage {
     protected abstract void doUpdate(SK searchKey, Resume r);
     protected abstract Resume doGet(SK searchKey);
     protected abstract void doDelete(SK searchKey);
-    protected abstract void insertElement(SK o, Resume r);
-    protected abstract void fillDeletedElement(SK o);
     protected abstract List<Resume> doCopyAll();
 
     @Override

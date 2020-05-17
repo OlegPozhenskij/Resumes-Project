@@ -11,7 +11,7 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doSave(Integer searchKey, Resume r) {
-        insertElement(searchKey, r);
+        list.add(r);
     }
 
     @Override
@@ -41,17 +41,7 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doDelete(Integer searchKey) {
-        fillDeletedElement(searchKey);
-    }
-
-    @Override
-    protected void insertElement(Integer index, Resume r) {
-        list.add(r);
-    }
-
-    @Override
-    protected void fillDeletedElement(Integer index) {
-        list.remove(index.intValue());
+        list.remove(searchKey.intValue());
     }
 
     @Override

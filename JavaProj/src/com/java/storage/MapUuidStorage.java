@@ -38,16 +38,6 @@ public class MapUuidStorage extends AbstractStorage<String> {
     }
 
     @Override
-    protected void insertElement(String o, Resume r) {
-        doSave(o, r);
-    }
-
-    @Override
-    protected void fillDeletedElement(String o) {
-        doDelete(o);
-    }
-
-    @Override
     public void clear() {
         map.clear();
     }

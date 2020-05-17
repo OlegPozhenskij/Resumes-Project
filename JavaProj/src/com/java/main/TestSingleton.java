@@ -1,4 +1,4 @@
-package com.java;
+package com.java.main;
 
 import com.java.model.ContactType;
 import com.java.model.SectionType;
@@ -7,7 +7,9 @@ public class TestSingleton {
     private static TestSingleton instance;
 
     public static TestSingleton getInstance() {
-        instance = new TestSingleton();
+        if (instance == null) {
+            instance = new TestSingleton();
+        }
         return instance;
     }
 

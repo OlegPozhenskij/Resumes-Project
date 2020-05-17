@@ -41,16 +41,6 @@ public class MapResumeStorage extends AbstractStorage<Resume> {
     }
 
     @Override
-    protected void insertElement(Resume o, Resume r) {
-        doSave(o, r);
-    }
-
-    @Override
-    protected void fillDeletedElement(Resume o) {
-        doDelete(o);
-    }
-
-    @Override
     public void clear() {
         map.clear();
     }
