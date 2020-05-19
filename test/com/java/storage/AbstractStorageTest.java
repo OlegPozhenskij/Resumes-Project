@@ -1,5 +1,6 @@
 package com.java.storage;
 
+import com.java.ResumeTestData;
 import com.java.exception.ExistStorageException;
 import com.java.exception.NotExistStorageException;
 import com.java.model.Resume;
@@ -7,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -26,10 +28,10 @@ public abstract class AbstractStorageTest {
     private static final Resume RESUME_4;
 
     static {
-        RESUME_1 = new Resume(UUID_1, "Name1");
-        RESUME_2 = new Resume(UUID_2, "Name2");
-        RESUME_3 = new Resume(UUID_3, "Name3");
-        RESUME_4 = new Resume(UUID_4, "Name4");
+        RESUME_1 = ResumeTestData.comleteResume(UUID_1, "danila");
+        RESUME_2 = ResumeTestData.comleteResume(UUID_2, "pozhenskij");
+        RESUME_3 = ResumeTestData.comleteResume(UUID_3, "artemiy");
+        RESUME_4 = ResumeTestData.comleteResume(UUID_4, "nicon");
     }
 
     protected AbstractStorageTest(Storage storage) {
@@ -57,7 +59,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        Resume newResume = new Resume(UUID_1, "New name1");
+        Resume newResume = ResumeTestData.comleteResume(UUID_1, "newPozhenskij");
         storage.update(newResume);
         assertTrue(newResume == storage.get(UUID_1));
     }

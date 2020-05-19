@@ -3,13 +3,17 @@ package com.java.model;
 import com.java.storage.Storage;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 
 public class ListSection extends Section {
     private final List<String> items;
+
+    public ListSection(String ... items) {
+        Objects.requireNonNull(items, "Items mast not be null");
+        this.items = Arrays.asList(items);
+    }
 
     public ListSection(List<String> items) {
         Objects.requireNonNull(items, "Items mast not be null");

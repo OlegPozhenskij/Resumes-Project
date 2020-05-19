@@ -4,7 +4,7 @@ import com.java.exception.ExistStorageException;
 import com.java.exception.NotExistStorageException;
 import com.java.model.Resume;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -69,7 +69,7 @@ public abstract class AbstractStorage<SK> implements Storage {
     public List<Resume> getAllSorted() {
         LOG.info("get all sorted");
         List<Resume> list = doCopyAll();
-        Collections.sort(list);
+        list.sort(Comparator.comparing(Resume::getUuid));
         return list;
     }
 }

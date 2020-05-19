@@ -4,7 +4,6 @@ import com.java.exception.StorageException;
 import com.java.model.Resume;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
