@@ -7,14 +7,18 @@ import com.java.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
+    protected static final File STORAGE_DIR_FILE = new File("/home/oleg/Видео/Projects/Resumes-Project/storage");
+
     protected Storage storage;
 
     private static final String UUID_1 = "uuid1";
@@ -61,7 +65,7 @@ public abstract class AbstractStorageTest {
     public void update() throws Exception {
         Resume newResume = ResumeTestData.comleteResume(UUID_1, "newPozhenskij");
         storage.update(newResume);
-        assertTrue(newResume == storage.get(UUID_1));
+        assertTrue(newResume.equals(storage.get(UUID_1)));
     }
 
     @Test(expected = NotExistStorageException.class)

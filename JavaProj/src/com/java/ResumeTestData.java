@@ -15,13 +15,13 @@ public class ResumeTestData {
         Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
         Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
-        contacts.put(PHONE,"89171585804");
+        contacts.put(PHONE, "89171585804");
         contacts.put(SKYPE, fullName);
-        contacts.put(LINKEDIN,"-");
+        contacts.put(LINKEDIN, "-");
         contacts.put(MAIL, fullName + "2@gmail.com");
-        contacts.put(GITHUB,"https://github.com/OlegPozhenskij");
-        contacts.put(STACKOVERFOLW,"-");
-        contacts.put(HOMEPAGE,"https://vk.com/o.pozhensky");
+        contacts.put(GITHUB, "https://github.com/OlegPozhenskij");
+        contacts.put(STACKOVERFOLW, "-");
+        contacts.put(HOMEPAGE, "https://vk.com/o.pozhensky");
 
         sections.put(PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
         sections.put(OBJECTIVE, new TextSection("Junior Java developer"));

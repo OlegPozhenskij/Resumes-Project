@@ -28,7 +28,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     protected void fillDeletedElement(Integer o) {
         Integer index = o;
         int numMoved = size - index - 1;
-        if(numMoved > 0) {
+        if (numMoved > 0) {
             System.arraycopy(storage, index + 1, storage, index, numMoved);
         }
     }

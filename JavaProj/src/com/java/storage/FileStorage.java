@@ -2,23 +2,21 @@ package com.java.storage;
 
 import com.java.exception.StorageException;
 import com.java.model.Resume;
+import com.java.storage.serializer.StreamSerializerStrategy;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public class FileStorage extends AbstractStorage<File> {
     protected File directory;
-    
-    protected abstract void doWrite(File f, Resume r) throws IOException;
-    protected abstract Resume doRead(File f) throws IOException;
+    private StreamSerializerStrategy streamSerializerStrategy;
 
-
-    protected AbstractFileStorage(File directory) {
+    protected FileStorage(File directory, StreamSerializerStrategy streamSerializerStrategy) {
         Objects.requireNonNull(directory, "directory mast not be null");
+        this.streamSerializerStrategy = streamSerializerStrategy;
         if(!directory.isDirectory())
             throw new IllegalArgumentException(directory.getAbsolutePath() + "is not directory!");
         if(!directory.canRead() || !directory.canWrite())
@@ -50,16 +48,16 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(File file, Resume r) {
         try {
-            doWrite(file, r);
+            streamSerializerStrategy.doWrite(new BufferedOutputStream(new FileOutputStream(file)), r);
         } catch (IOException e) {
-            throw new StorageException(r.getUuid(), "File write error");
+            throw new StorageException(r.getUuid(), "File write error", e);
         }
     }
 
     @Override
     protected Resume doGet(File file) {
         try {
-            return doRead(file);
+            return streamSerializerStrategy.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("Couldn't read file " + file.getAbsolutePath(), file.getName(), e);
         }
@@ -77,7 +75,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         List<Resume> list = new ArrayList<>(Collections.emptyList());
         File[] files = directory.listFiles();
         if (files == null) {
-            throw new StorageException("Directory read error", null);
+            throw new StorageException("Directory read error");
         }
         for (File f : files) {
             list.add(doGet(f));
@@ -97,9 +95,9 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        int length = directory.list().length;
-        if(length != 0)
-            return length;
+        String[] s = directory.list();
+        if(s != null)
+            return s.length;
         throw new StorageException(null, "Directory read error");
     }
 }

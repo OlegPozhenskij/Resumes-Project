@@ -1,6 +1,7 @@
 package com.java.main;
 
 import java.io.File;
+import java.io.InputStream;
 
 public class MainFile {
     private static final String FILE_NAME = "/home/oleg/Видео/Projects/Resumes-Project/JavaProj";
